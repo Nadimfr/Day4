@@ -6,5 +6,16 @@ app.get('/', (req, res)=> {
     res.send("Hello World");
 });
 
+app.get('/getUser', (req,res) => {
+
+    var userObj = {
+        userId: 1,
+        userName: "Nadim",
+        active: true
+    }
+
+    res.send(userObj);
+});
+
 app.listen(4000);
 
