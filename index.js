@@ -8,9 +8,7 @@ app.get('/', (req, res)=> {
     res.send("Hello World");
 });
 
-const users = [{ name: 'Nadim' , password: '1234' }, 
-               { name: 'Charles' , password: '0000' }
-];
+const users = [{name: "Nadim" , password:"0000"}];
 
 app.get('/getUser', (req,res) => {
     res.json(users)
@@ -18,19 +16,21 @@ app.get('/getUser', (req,res) => {
 
 app.post('/users' , (req,res) => {
 
-    const user = { name: req.body.name, password: req.body.password }
+    const {name, password} = req.body;
+    const user = {name , password };
+
     users.push(user)
-    res.status(201).send('User created')
+    res.status(201).send('User created');
 });
 
 app.post('/users/login' , async (req,res) => {
 
     const user = users.find(user => user.name = req.body.name)
 
-    if (user == null) {
+    if (!user) {
         return res.status(400).send('User not found')
     } else
-    return res.status(200).send('User found : ' +res.body.name)
+    return res.status(200).send('User found : ' req.body.name)
 });
 
 app.listen(4000);
